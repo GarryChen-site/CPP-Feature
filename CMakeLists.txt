@@ -6,3 +6,4 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Add one line per feature folder
 add_subdirectory(span)
+add_subdirectory(enable_shared_from_this)
