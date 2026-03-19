@@ -38,11 +38,15 @@ struct D1 {
 
 // -----------------------------
 
+// This overload is added to the set of overloads if C is
+// a class or reference-to-class type and F is a pointer to member function of C
 template <class C, class F>
 auto test(C c, F f) -> decltype((void)(c.*f)(), void()) {
     std::cout << "(1) Class/class reference overload called" << std::endl;
 }
 
+// This overload is added to the set of overloads if C is a
+// pointer-to-class type and F is a pointer to member function of C
 template <class C, class F>
 auto test(C c, F f) -> decltype((void)((c->*f)()), void()) {
     std::cout << "(2) Pointer overload called" << std::endl;
@@ -51,10 +55,10 @@ auto test(C c, F f) -> decltype((void)((c->*f)()), void()) {
 void test(...) { std::cout << "(3) Catch-all overload called" << std::endl; }
 
 int main() {
-    // f<A>(0);
-    // f<B>(0);
-    // g<C>(0);
-    // h<D>(0);
+    // f<A>(0); A does not contain a member Y
+    // f<B>(0); The Y member of B is not a type
+    // g<C>(0); The N member of C is not a non-type
+    // h<D>(0); The TT member of D is not a template
 
     f<B1>(0);
     g<C1>(0);
