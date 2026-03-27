@@ -47,6 +47,7 @@ struct Container : std::enable_shared_from_this<Container> {
 
     void CreateMember() { memberObj = std::make_shared<MyObj>(); }
 
+    // he alias constructor's signature — it borrows the owner's control block.
     std::shared_ptr<MyObj> GetAsMyObj() {
         return std::shared_ptr<MyObj>(shared_from_this(), memberObj.get());
     }
